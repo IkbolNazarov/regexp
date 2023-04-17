@@ -1,10 +1,9 @@
 package services
 
 import (
-	"admin/internal/models"
-	"admin/internal/repository"
+	"regexp/internal/models"
+	"regexp/internal/repository"
 	"errors"
-	"log"
 	"regexp"
 )
 
@@ -15,6 +14,39 @@ type Services struct {
 func NewServices(rep *repository.Repository) *Services {
 	return &Services{Repository: rep}
 }
+
+func (s *Services) AddService(service *models.CardRule) error {
+	err := s.Repository.AddService(service)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+
+func (s *Services) GetService(card string) ([]*models.CardRule, error) {
+	var counter int64 = 0
+	var response []*models.CardRule
+
+	CardRule, l, err := s.Repository.GetCardRule()
+	if err != nil {
+		return nil, err
+	}
+	var i int64
+	for i = 0; i < l; i++ {
+		match, _ := regexp.MatchString(CardRule[i].Regexp, card)
+		if match {
+			response = append(response, CardRule[i])
+			counter++
+		}
+	}
+	if counter == 0 {
+		return nil, errors.New("Wrong Card!")
+	}
+
+	return response, nil
+}
+
 
 // func (s *Services) AddUser(card *models.Card) (err error) {
 
@@ -34,46 +66,10 @@ func NewServices(rep *repository.Repository) *Services {
 // 	return nil
 // }
 
-func (s *Services) AddService(service *models.CardRule) error {
-	err := s.Repository.AddService(service)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (s *Services) AddAgent(agent *models.Agents) error {
-	err := s.Repository.AddAgent(agent)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (s *Services) GetService(card string) ([]*models.CardRule, error) {
-	counter := 0
-	var response []*models.CardRule
-
-	CardRule, l, err := s.Repository.GetCardRule()
-	if err != nil {
-		return nil, err
-	}
-
-	var i int64
-	for i = 0; i < l; i++ {
-		match, _ := regexp.MatchString(CardRule[i].Regexp, card)
-		if match {
-			response = append(response, CardRule[i])
-			counter++
-		}
-
-		log.Println(l)
-		log.Println(match)
-		log.Println(CardRule[i].Regexp)
-	}
-	if counter == 0 {
-		return nil, errors.New("Wrong Card!")
-	}
-	log.Println(counter)
-	return response, nil
-}
+// func (s *Services) AddAgent(agent *models.Agents) error {
+// 	err := s.Repository.AddAgent(agent)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }

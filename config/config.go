@@ -1,7 +1,7 @@
 package config
 
 import (
-	"admin/internal/models"
+	"regexp/internal/models"
 	"encoding/json"
 	"io"
 	"log"

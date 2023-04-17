@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"admin/internal/db"
-	"admin/internal/models"
+	"regexp/internal/db"
+	"regexp/internal/models"
 	"log"
 
 	"gorm.io/gorm"
@@ -14,22 +14,6 @@ type Repository struct {
 
 func NewRepository(conn *gorm.DB) *Repository {
 	return &Repository{Connection: conn}
-}
-
-func (r *Repository) AddUser(card *models.Agents) error {
-	tx := db.DataB.Table(models.GetTableName()).Create(&card)
-	if tx.Error != nil {
-		return tx.Error
-	}
-	return nil
-}
-
-func (r *Repository) AddAgent(card *models.Agents) error {
-	tx := db.DataB.Table(models.GetTableName()).Create(&card)
-	if tx.Error != nil {
-		return tx.Error
-	}
-	return nil
 }
 
 func (r *Repository) AddService(service *models.CardRule) error {
@@ -53,4 +37,19 @@ func (r *Repository) GetCardRule() ([]*models.CardRule, int64, error) {
 		return nil, 0, tx.Error
 	}
 	return cardRule, l, nil
-}	
+}
+	//func (r *Repository) AddUser(card *models.Agents) error {
+	// 	tx := db.DataB.Table(models.GetTableName()).Create(&card)
+	// 	if tx.Error != nil {
+	// 		return tx.Error
+	// 	}
+	// 	return nil
+	// }
+	
+	// func (r *Repository) AddAgent(card *models.Agents) error {
+	// 	tx := db.DataB.Table(models.GetTableName()).Create(&card)
+	// 	if tx.Error != nil {
+	// 		return tx.Error
+	// 	}
+	// 	return nil
+	// }

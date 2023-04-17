@@ -1,14 +1,14 @@
 package main
 
 import (
-	"admin/internal/db"
-	"admin/internal/repository"
-	"admin/internal/server"
-	"admin/internal/services"
 	"log"
 	"net"
+	"regexp/internal/db"
+	"regexp/internal/repository"
+	"regexp/internal/server"
+	"regexp/internal/services"
 
-	"admin/config"
+	"regexp/config"
 
 	"github.com/gin-gonic/gin"
 )
