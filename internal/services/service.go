@@ -48,28 +48,11 @@ func (s *Services) GetService(card string) ([]*models.CardRule, error) {
 }
 
 
-// func (s *Services) AddUser(card *models.Card) (err error) {
 
-// 	CardRule, l := s.Repository.GetCardRule()
-// 	var i int64
-// 	for i=0; i<l; i++{
-// 		log.Println(CardRule[i].Regexp)
-// 		match, _ := regexp.MatchString(CardRule[i].Regexp,card.Card1)
-// 		if match {
-// 			return errors.New("wrong card number!")
-// 		}
-// 	}
-// 	err = s.Repository.AddUser(card)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
-
-// func (s *Services) AddAgent(agent *models.Agents) error {
-// 	err := s.Repository.AddAgent(agent)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
+func (s *Services) AddAgent(agent *models.Agents) error {
+	err := s.Repository.AddAgent(agent)
+	if err != nil {
+		return err
+	}
+	return nil
+}

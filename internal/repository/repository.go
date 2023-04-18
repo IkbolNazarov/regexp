@@ -38,18 +38,11 @@ func (r *Repository) GetCardRule() ([]*models.CardRule, int64, error) {
 	}
 	return cardRule, l, nil
 }
-	//func (r *Repository) AddUser(card *models.Agents) error {
-	// 	tx := db.DataB.Table(models.GetTableName()).Create(&card)
-	// 	if tx.Error != nil {
-	// 		return tx.Error
-	// 	}
-	// 	return nil
-	// }
-	
-	// func (r *Repository) AddAgent(card *models.Agents) error {
-	// 	tx := db.DataB.Table(models.GetTableName()).Create(&card)
-	// 	if tx.Error != nil {
-	// 		return tx.Error
-	// 	}
-	// 	return nil
-	// }
+
+	func (r *Repository) AddAgent(card *models.Agents) error {
+		tx := db.DataB.Table(models.GetTableName()).Create(&card)
+		if tx.Error != nil {
+			return tx.Error
+		}
+		return nil
+	}

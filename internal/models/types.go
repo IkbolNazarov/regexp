@@ -17,14 +17,22 @@ type Config struct {
 	}
 }
 
+type Agents struct {
+	Id    int    `gorm:"column:id"`
+	Agent string `gorm: coolumn:agent`
+}
 
 type CardRule struct {
-	Id       int    `gorm:"column:id"`
-	Regexp   string `gorm:"column:regexp"`
-	Type string `gorm:"column:type"`
-	Agent    string `gorm: coolumn:agent`
+	Id     int    `gorm:"column:id"`
+	Regexp string `gorm:"column:regexp"`
+	Type   string `gorm:"column:type"`
+	Agent  int    `gorm: coolumn:agent`
 }
 
 func GetRuleTable() string {
 	return "regexp"
+}
+
+func GetTableName() string {
+	return "agents"
 }

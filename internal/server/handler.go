@@ -28,7 +28,7 @@ func (h *Handler) Init() {
 		context.JSON(http.StatusOK, gin.H{"message": "Connected"})
 	})
 	// h.Engine.POST("/add_card", h.AddUser)
-	// h.Engine.POST("/add_agent", h.AddAgent)
+	h.Engine.POST("/add_agent", h.AddAgent)
 	h.Engine.POST("/add_service", h.AddService)
 	h.Engine.GET("/get_service", h.GetService)
 }
@@ -59,18 +59,16 @@ func (h *Handler) GetService(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, Services)
 }
 
-
-
-// func (h *Handler) AddAgent(ctx *gin.Context) {
-// 	var agent *models.Agents
-// 	if err := ctx.ShouldBindJSON(&agent); err != nil {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
-// 		return
-// 	}
-// 	err := h.Services.AddAgent(agent)
-// 	if err != nil {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
-// 		return
-// 	}
-// 	ctx.JSON(http.StatusOK, "Agent is added!")
-// }
+func (h *Handler) AddAgent(ctx *gin.Context) {
+	var agent *models.Agents
+	if err := ctx.ShouldBindJSON(&agent); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
+		return
+	}
+	err := h.Services.AddAgent(agent)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
+		return
+	}
+	ctx.JSON(http.StatusOK, "Agent is added!")
+}
