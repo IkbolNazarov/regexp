@@ -1,11 +1,11 @@
 package server
 
 import (
+	"log"
+	"net/http"
 	"regexp/internal/models"
 	"regexp/internal/repository"
 	"regexp/internal/services"
-	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -51,12 +51,12 @@ func (h *Handler) AddService(ctx *gin.Context) {
 func (h *Handler) GetService(ctx *gin.Context) {
 	cardNumb := ctx.Query("card_numb")
 	log.Println(cardNumb)
-	Services, err := h.Services.GetService(cardNumb)
+	services, err := h.Services.GetService(cardNumb)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
-	ctx.JSON(http.StatusOK, Services)
+	ctx.JSON(http.StatusOK, services)
 }
 
 func (h *Handler) AddAgent(ctx *gin.Context) {
