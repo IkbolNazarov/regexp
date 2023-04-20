@@ -23,7 +23,7 @@ type Agents struct {
 	Sort  int    `gorm:"column:sort"`
 }
 
-type CardRule struct {
+type Regexp struct {
 	Id      int    `gorm:"column:id"`
 	Regexp  string `gorm:"column:regexp"`
 	Type    string `gorm:"column:type"`

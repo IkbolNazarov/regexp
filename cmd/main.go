@@ -1,14 +1,14 @@
 package main
 
 import (
+	"cards/internal/db"
+	"cards/internal/repository"
+	"cards/internal/server"
+	"cards/internal/services"
 	"log"
 	"net"
-	"regexp/internal/db"
-	"regexp/internal/repository"
-	"regexp/internal/server"
-	"regexp/internal/services"
 
-	"regexp/config"
+	"cards/config"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,6 +1,6 @@
 {
     "localHost": {
-      "port": "8080",
+      "port": "8070",
       "host": "localhost"
     },
     
@@ -9,6 +9,6 @@
       "port": "5432",
       "user": "postgres",
       "password": "1111",
-      "dbname": "db"
+      "dbname": "postgres"
     }
   }

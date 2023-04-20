@@ -1,11 +1,11 @@
 package server
 
 import (
+	"cards/internal/models"
+	"cards/internal/repository"
+	"cards/internal/services"
 	"log"
 	"net/http"
-	"regexp/internal/models"
-	"regexp/internal/repository"
-	"regexp/internal/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -34,7 +34,7 @@ func (h *Handler) Init() {
 }
 
 func (h *Handler) AddService(ctx *gin.Context) {
-	var service *models.CardRule
+	var service *models.Regexp
 	if err := ctx.ShouldBindJSON(&service); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
 		return

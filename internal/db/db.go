@@ -1,7 +1,7 @@
 package db
 
 import (
-	"regexp/config"
+	"cards/config"
 	"fmt"
 
 	"gorm.io/driver/postgres"

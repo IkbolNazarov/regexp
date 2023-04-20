@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"regexp/internal/db"
-	"regexp/internal/models"
+	"cards/internal/db"
+	"cards/internal/models"
+
 
 	"gorm.io/gorm"
 )
@@ -15,7 +16,7 @@ func NewRepository(conn *gorm.DB) *Repository {
 	return &Repository{connection: conn}
 }
 
-func (r *Repository) AddService(service *models.CardRule) error {
+func (r *Repository) AddService(service *models.Regexp) error {
 	tx := db.DataB.Table(models.GetRuleTable()).Create(&service)
 	if tx.Error != nil {
 		return tx.Error
@@ -23,14 +24,11 @@ func (r *Repository) AddService(service *models.CardRule) error {
 	return nil
 }
 
-func (r *Repository) GetCardRule() ([]*models.CardRule, int, error) {
-	var cardRule []*models.CardRule
-	tx := db.DataB.Preload("Agent").Find(&cardRule)
-	if tx.Error != nil {
-		return nil, 0, tx.Error
-	}
-	var l int64
-	tx = db.DataB.Table(models.GetRuleTable()).Count(&l)
+func (r *Repository) GetCardRule() ([]*models.Regexp, int, error) {
+	var cardRule []*models.Regexp
+	tx := db.DataB.Table("regexp").Preload("Agent").Joins("join agents on regexp.agent_id = agents.id").Order("agents.sort DESC").Find(&cardRule)
+	//tx := db.DataB.Raw("Select * from regexp join agent on cards.agent=agent.id order by agent.sort")
+	//tx := db.DataB.Preload("Agent").Order("agents.sort").Find(&cardRule)
 	if tx.Error != nil {
 		return nil, 0, tx.Error
 	}

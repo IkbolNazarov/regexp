@@ -3,9 +3,11 @@ package services
 import (
 	"errors"
 	"fmt"
+	"log"
 	"regexp"
-	"regexp/internal/models"
-	"regexp/internal/repository"
+
+	"cards/internal/models"
+	"cards/internal/repository"
 )
 
 type Services struct {
@@ -16,7 +18,7 @@ func NewServices(rep *repository.Repository) *Services {
 	return &Services{Repository: rep}
 }
 
-func (s *Services) AddService(service *models.CardRule) error {
+func (s *Services) AddService(service *models.Regexp) error {
 	err := s.Repository.AddService(service)
 	if err != nil {
 		return err
@@ -24,16 +26,20 @@ func (s *Services) AddService(service *models.CardRule) error {
 	return nil
 }
 
-func (s *Services) GetService(card string) ([]*models.CardRule, error) {
+func (s *Services) GetService(card string) ([]*models.Regexp, error) {
 	var counter int64 = 0
-	var response []*models.CardRule
-
+	var response []*models.Regexp
 	CardRule, l, err := s.Repository.GetCardRule()
 	if err != nil {
 		return nil, fmt.Errorf("GetCardRule %v", err)
 	}
+	log.Println(l)
 	for i := 0; i < l; i++ {
-		match, _ := regexp.MatchString(CardRule[i].Regexp, card)
+		log.Println("6")
+		match, _ := regexp.MatchString("^4[0-9]{12}(?:[0-9]{3})?$", "4000001234567899")
+		log.Println(match)
+		log.Println("6")
+		//match, _ := regexp.MatchString(CardRule[i].RegularExp, card)
 		if match {
 			response = append(response, CardRule[i])
 			counter++

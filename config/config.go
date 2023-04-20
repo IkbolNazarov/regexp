@@ -1,7 +1,7 @@
 package config
 
 import (
-	"regexp/internal/models"
+	"cards/internal/models"
 	"encoding/json"
 	"io"
 	"log"
